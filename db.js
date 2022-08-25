@@ -5,12 +5,14 @@ let db
 module.exports = {
   connectDb: async  _ => {
     try {
-    db = await MongoClient('mongodb://12.7.0.1:27017/bookstore')
+    db = await new  MongoClient('mongodb://localhost:27017/bookstore')
+    await db.connect()
+    db = db.db()
     _()
     } catch (err) {
       console.log(err);
       _(err)
     }
   },
-  getDb: _ => Db
+  getDb: _ => db
 }

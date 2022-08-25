@@ -4,8 +4,17 @@ const {getDb, connectDb} = require('./db');
 
 const app = express()
 
-app.listen(80,  _ => console.log(chalk.blue.bgCyanBright(`server is running on http://127.0.1`)))
+let db
+
+connectDb( _ => {
+  if (!_) {
+    app.listen(80,  _ => console.log(chalk.blue.bgCyanBright(`server is running on http://127.0.1`)))
+  }
+  db = getDb()
+})
+
 
 app.get('/', (req, res) => {
-  res.json({title: 'welcome'})
+  
+  res.json(db.collection('books').find())
 })
