@@ -1,5 +1,6 @@
 const express = require('express');
 const chalk = require('chalk');
+const {getDb, connectDb} = require('./db');
 
 const app = express()
 
