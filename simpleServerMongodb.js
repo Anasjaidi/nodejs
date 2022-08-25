@@ -14,7 +14,10 @@ connectDb( _ => {
 })
 
 
-app.get('/', (req, res) => {
-  
-  res.json(db.collection('books').find())
+app.get('/', async (req, res) => {
+  let books = []
+  await db.collection('books').find().sort({title: -1}).forEach(book => {
+    books.push(book)
+  });
+  res.json(books)
 })
